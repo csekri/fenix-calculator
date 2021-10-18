@@ -1,0 +1,34 @@
+<strings>
+    <string id="AppName">Prefix Calculator</string>
+    <string id="StartPrompt">Prefix Calculator\nPress START</string>
+    <string id="MenuEnter">Enter</string>
+    <string id="MenuClear">Clear</string>
+    <string id="MenuSwap">Swap</string>
+    <string id="MenuInvert">±</string>
+    <string id="MenuAdd">+</string>
+    <string id="MenuSubtract">-</string>
+    <string id="MenuMultiply">×</string>
+    <string id="MenuDivide">÷</string>
+    <string id="MenuSqrt">Square root</string>
+    <string id="MenuPower">Power</string>
+    <string id="MenuE">e</string>
+    <string id="MenuLogarithm">Logarithms</string>
+    <string id="MenuLog10">Base 10 logarithm</string>
+    <string id="MenuLogN">Natural logarithm</string>
+    <string id="MenuLog">2 op, base fst input</string>
+    <string id="MenuExit">Exit</string>
+    <string id="MenuPre">Prefix</string>
+    <string id="MenuPost">Postfix</string>
+    <string id="MenuDegrees">Degrees</string>
+    <string id="MenuRadians">Radians</string>
+    <string id="MenuTrigonometry">Trigonometry</string>
+    <string id="MenuPi">Pi</string>
+    <string id="MenuSin">sin</string>
+    <string id="MenuCos">cos</string>
+    <string id="MenuTan">tan</string>
+    <string id="MenuASin">asin</string>
+    <string id="MenuACos">acos</string>
+	<string id="MenuATan">atan</string>
+	<string id="MenuDegRad">deg -> rad</string>
+	<string id="MenuRadDeg">rad -> deg</string>
+</strings>

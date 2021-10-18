@@ -1,0 +1,4 @@
+<menu id="AngleMenu">
+	<menu-item id="deg">@Strings.MenuDegrees</menu-item>
+	<menu-item id="rad">@Strings.MenuRadians</menu-item>
+</menu>

@@ -1,0 +1,3 @@
+<layout id="MainLayout">
+    <label x="center" y="center" text="@Strings.StartPrompt" color="Graphics.COLOR_WHITE" justification="Graphics.TEXT_JUSTIFY_CENTER" />
+</layout>

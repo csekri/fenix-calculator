@@ -1,0 +1,13 @@
+<menu id="OpsMenu">
+	<menu-item id="enter">@Strings.MenuEnter</menu-item>
+	<menu-item id="add">@Strings.MenuAdd</menu-item>
+	<menu-item id="subtract">@Strings.MenuSubtract</menu-item>
+	<menu-item id="invert">@Strings.MenuInvert</menu-item>
+	<menu-item id="multiply">@Strings.MenuMultiply</menu-item>
+	<menu-item id="divide">@Strings.MenuDivide</menu-item>
+	<menu-item id="sqrt">@Strings.MenuSqrt</menu-item>
+	<menu-item id="power">@Strings.MenuPower</menu-item>
+	<menu-item id="logarithm">@Strings.MenuLogarithm</menu-item>
+	<menu-item id="trigonometry">@Strings.MenuTrigonometry</menu-item>
+	<menu-item id="clear">@Strings.MenuClear</menu-item>
+</menu>

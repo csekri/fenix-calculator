@@ -1,0 +1,6 @@
+<menu id="LogarithmMenu">
+	<menu-item id="e">@Strings.MenuE</menu-item>
+	<menu-item id="log10">@Strings.MenuLog10</menu-item>
+	<menu-item id="logn">@Strings.MenuLogN</menu-item>
+	<menu-item id="log">@Strings.MenuLog</menu-item>
+</menu>

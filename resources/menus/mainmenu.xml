@@ -1,0 +1,5 @@
+<menu id="MainMenu">
+	<menu-item id="exit">@Strings.MenuExit</menu-item>
+	<menu-item id="pre">@Strings.MenuPre</menu-item>
+	<menu-item id="post">@Strings.MenuPost</menu-item>
+</menu>

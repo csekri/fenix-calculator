@@ -1,0 +1,11 @@
+<menu id="TrigonometryMenu">
+	<menu-item id="pi">@Strings.MenuPi</menu-item>
+	<menu-item id="sin">@Strings.MenuSin</menu-item>
+	<menu-item id="cos">@Strings.MenuCos</menu-item>
+	<menu-item id="tan">@Strings.MenuTan</menu-item>
+	<menu-item id="asin">@Strings.MenuASin</menu-item>
+	<menu-item id="acos">@Strings.MenuACos</menu-item>
+	<menu-item id="atan">@Strings.MenuATan</menu-item>
+	<menu-item id="degrad">@Strings.MenuDegRad</menu-item>
+	<menu-item id="raddeg">@Strings.MenuRadDeg</menu-item>
+</menu>
