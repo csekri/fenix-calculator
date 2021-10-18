@@ -1,9 +1,8 @@
 <strings>
-    <string id="AppName">Prefix Calculator</string>
+    <string id="AppName">Math Calculator</string>
     <string id="StartPrompt">Prefix Calculator\nPress START</string>
     <string id="MenuEnter">Enter</string>
     <string id="MenuClear">Clear</string>
-    <string id="MenuSwap">Swap</string>
     <string id="MenuInvert">±</string>
     <string id="MenuAdd">+</string>
     <string id="MenuSubtract">-</string>
@@ -19,8 +18,6 @@
     <string id="MenuExit">Exit</string>
     <string id="MenuPre">Prefix</string>
     <string id="MenuPost">Postfix</string>
-    <string id="MenuDegrees">Degrees</string>
-    <string id="MenuRadians">Radians</string>
     <string id="MenuTrigonometry">Trigonometry</string>
     <string id="MenuPi">Pi</string>
     <string id="MenuSin">sin</string>

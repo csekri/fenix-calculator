@@ -18,14 +18,20 @@ FEATURES
 - mathematical constants: pi, e,
 - input can expand to up to four lines, allowing longer calculations.
 
-PREFIX EXAMPLES:
+PREFIX EXAMPLES
 
 Convert 10% gradient into degrees: "raddeg atan 0.1".
 
 ((1+sqrt(5)) / 2): "/ + 1 sqrt 5 2".
 
-POSTFIX EXAMPLES:
+POSTFIX EXAMPLES
 
 Add up multiple numbers: "1.2 3.4 101 39.9 + + +".
 
 (2^2+2^3+2^4): "2 2 ^ 2 3 ^ 2 4 ^ + +".
+
+NOTE
+
+Idea for the user interface was taken from https://github.com/rvk/rpncalc.
+
+
