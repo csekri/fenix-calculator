@@ -1,5 +1,13 @@
+/*
+Tests for the correctness of the calculation evaluator both in
+perfix and postfix notations
+*/
+
 using Toybox.Test;
 
+
+// Tests if a and b are close enough (to say the evaluation is correct).
+// Returns true if they are close otherwise false.
 function toleranceTest(a, b) {
 	var epsilon = 0.001;
 	if ((a.toFloat()-b.toFloat())*(a.toFloat()-b.toFloat()) < epsilon * epsilon) {
@@ -9,6 +17,7 @@ function toleranceTest(a, b) {
 	}
 }
 
+// Tests for the prefix notation calculation
 function prefixTests() {
 	var calc = new Calc();
 	var stack = ["1"];
@@ -30,7 +39,7 @@ function prefixTests() {
 	Test.assertEqual(toleranceTest(calc.eval(stack), "1.666666"), true);
 	
 	stack = ["/", "7", "0"];
-	Test.assertEqual(calc.eval(stack), "inf");
+	Test.assertEqual(calc.eval(stack), "nan");
 	
 	stack = ["log", "2", "1024"];
 	Test.assertEqual(toleranceTest(calc.eval(stack), "10"), true);
@@ -87,7 +96,7 @@ function prefixTests() {
 }
 
 
-
+// Tests for the postfix notation calculation
 function postfixTests() {
 	var calc = new Calc();
 	var stack = ["1"];
@@ -109,7 +118,7 @@ function postfixTests() {
 	Test.assertEqual(toleranceTest(calc.evalPost(stack), "1.666666"), true);
 	
 	stack = ["7", "0", "/"];
-	Test.assertEqual(calc.evalPost(stack), "inf");
+	Test.assertEqual(calc.evalPost(stack), "nan");
 	
 	stack = ["2", "1024", "log"];
 	Test.assertEqual(toleranceTest(calc.evalPost(stack), "10"), true);

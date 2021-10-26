@@ -5,33 +5,30 @@ using Toybox.WatchUi as Ui;
 class MainMenuDelegate extends Ui.MenuInputDelegate {
 	var view;
 	
+	// Constructor.
 	function initialize(targetView) {
 		view = targetView;
 		MenuInputDelegate.initialize();
 	}
 	
+	
+	// Called when an item is selected.
 	function onMenuItem(item) {
 		if (item == :exit) {
-			for (var i = 0; i < 700; i += 1) {
+			for (var i = 0; i < 2; i += 1) {
 				Ui.popView(Ui.SLIDE_IMMEDIATE);
 			}
 		}
-		else if (item == :pre) {
+		else if (item == :pre and !view.computeMode) {
 			view.setComputeMode(true);
 			view.stack = [];
-			view.input = [];
-			view.current = ".";
 			view.isInputFull = false;
-			view.inputActive = false;
 	  		Ui.requestUpdate();
 		}
-		else if (item == :post) {
+		else if (item == :post and view.computeMode) {
 			view.setComputeMode(false);
-			view.stack = [];
-			view.input = [];
-			view.current = ".";
+			view.stack = ["0"];
 			view.isInputFull = false;
-			view.inputActive = false;
 	  		Ui.requestUpdate();
 		}
 	}

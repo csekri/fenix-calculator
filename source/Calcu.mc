@@ -12,13 +12,26 @@ class Calc {
 		       token.equals("3") or token.equals("4") or token.equals("5") or
 		       token.equals("6") or token.equals("7") or token.equals("8") or token.equals("9");
 	}
+	
+	
+	// same as isDigit but includes "." too
+	function isDigitPlus(token) {
+		return Calc.isDigit(token) or token.equals(".");
+	}
+	function formatNumber(str) {
+		if (str.equals(".")) { return "0.0"; }
+		if (str.substring(0,1).equals(".")) { return "0" + str; }
+		return str;
+	}
+	
+	
 	// evaluates prefix notation expression
 	function eval(tokens) {
 		var stack = [];
-		var stack_tmp = [];
 		for (var i = 0; i < tokens.size(); i += 1){
 		    var token = tokens[tokens.size() - i - 1];
-		    // double operators
+		    
+		    // binary operators
 		    if (token.equals("+") or token.equals("-") or token.equals("*") or token.equals("/")
 		     or token.equals("^") or token.equals("log") or token.equals("+")
 		     or token.equals("+") or token.equals("+") or token.equals("+")) {
@@ -36,7 +49,7 @@ class Calc {
 			    }
 			    if (token.equals("/")) {
 			    	if (stack[stack.size()-2] == 0) {
-		        		stack[stack.size()-2] = - Math.log(0, 10);
+		        		stack[stack.size()-2] = NaN;
 		        	} else {
 		        		stack[stack.size()-2] = (1.0 * pop) / stack[stack.size()-2];
 		            }
@@ -48,20 +61,16 @@ class Calc {
 			        stack[stack.size()-2] = Math.log(stack[stack.size()-2], pop);
 			    }
 			    
-			    stack_tmp = new [stack.size()-1];
-		        for (var k = 0; k < stack.size() - 1; k += 1){
-			        stack_tmp[k] = stack[k];
-		        }
-		        stack = stack_tmp;
+		        stack = stack.slice(null, stack.size() - 1);
 		        continue;
 			}
 			
+			// unary operators
 		    if (token.equals("(-)") or token.equals("sqrt") or token.equals("sin") or token.equals("cos")
 		     or token.equals("tan") or token.equals("asin") or token.equals("acos")
 		     or token.equals("atan") or token.equals("ln") or token.equals("lg")
 		     or token.equals("raddeg") or token.equals("degrad")) {
 		        if (stack.size() < 1) { return "-"; }
-			    // single operators
 			    if (token.equals("(-)")) {
 			        stack[stack.size()-1] *= -1;}
 			    if (token.equals("sqrt")) {
@@ -109,34 +118,46 @@ class Calc {
 					pureInteger = false;
 				}
 			}
-			
-			
-			if (isDigit(token.substring(0,1))) {		
+			if (Calc.isDigitPlus(token.substring(0,1))) {
 				if (pureInteger) {
-					integer = token.toNumber().toLong(); // String.toLong() doesn't exist
+			    	var apiVersion = System.getDeviceSettings().monkeyVersion;
+			    	// from API level 3.1.0 is the toLong supported
+					if (apiVersion[0] >= 3 and apiVersion[1] >= 1) {
+						integer = token.toLong(); // 64 bit
+					} else {
+						integer = token.toNumber().toLong(); // 32 bit
+					}
 					stack.add(integer);
 				} else {
-					real = token.toFloat(); // String.toDouble() doesn't exist
+					var formattedToken = Calc.formatNumber(token);
+					real = formattedToken.toFloat();
 					stack.add(real);
 				}
 			}			
 		}
+		
 		if (stack.size() == 1) {
-			return stack[0].toString();
+			if (stack[0] > Math.pow(10, 12) or stack[0] < -Math.pow(10, 12)) {
+				return stack[0].format("%.7E");
+			} else {
+				return stack[0].toString();
+			}
 		} else {
 			return "-";
 		}
 	}
+	
+	
 	// evaluates postfix notation expression
 	function evalPost(tokens) {
 		var stack = [];
-		var stack_tmp = [];
 		if (tokens.size() == 0) {
 			return "-";
 		}
 		for (var i = 0; i < tokens.size(); i += 1){
 		    var token = tokens[i];
-		    // double operators
+		    
+		    // binary operators
 		    if (token.equals("+") or token.equals("-") or token.equals("*") or token.equals("/")
 		     or token.equals("^") or token.equals("log") or token.equals("+")
 		     or token.equals("+") or token.equals("+") or token.equals("+")) {
@@ -154,7 +175,7 @@ class Calc {
 			    }
 			    if (token.equals("/")) {
 			    	if (stack[stack.size()-1] == 0) {
-		        		stack[stack.size()-2] = -Math.log(0, 10);
+		        		stack[stack.size()-2] = NaN;
 		        	} else {
 		        		stack[stack.size()-2] = (1.0 * stack[stack.size()-2]) / pop;
 		            }
@@ -166,21 +187,16 @@ class Calc {
 			        stack[stack.size()-2] = Math.log(pop, stack[stack.size()-2]);
 			    }
 			    
-			    stack_tmp = new [stack.size()-1];
-		        for (var k = 0; k < stack.size() - 1; k += 1){
-			        stack_tmp[k] = stack[k];
-		        }
-		        stack = stack_tmp;
+		        stack = stack.slice(null, stack.size() - 1);
 		        continue;
 			}
 			
-			
+			// unary operators
 		    if (token.equals("(-)") or token.equals("sqrt") or token.equals("sin") or token.equals("cos")
 		     or token.equals("tan") or token.equals("asin") or token.equals("acos")
 		     or token.equals("atan") or token.equals("ln") or token.equals("lg")
 		     or token.equals("raddeg") or token.equals("degrad")) {
 		        if (stack.size() < 1) { return "-"; }
-			    // single operators
 			    if (token.equals("(-)")) {
 			        stack[stack.size()-1] *= -1;}
 			    if (token.equals("sqrt")) {
@@ -218,7 +234,7 @@ class Calc {
 		        stack.add(pi);
 		        continue;
 		    }
-		
+
 		    var integer = null;
 		    var real = null;
 		    var pureInteger = true;
@@ -227,20 +243,30 @@ class Calc {
 					pureInteger = false;
 				}
 			}
-			
-			
-			if (isDigit(token.substring(0,1))) {		
+			if (Calc.isDigitPlus(token.substring(0,1))) {
 				if (pureInteger) {
-					integer = token.toNumber().toLong();
+			    	var apiVersion = System.getDeviceSettings().monkeyVersion;
+			    	// from API level 3.1.0 is the toLong supported
+					if (apiVersion[0] >= 3 and apiVersion[1] >= 1) {
+						integer = token.toLong(); // 64 bit
+					} else {
+						integer = token.toNumber().toLong(); // 32 bit
+					}
 					stack.add(integer);
 				} else {
-					real = token.toFloat();
+					var formattedToken = Calc.formatNumber(token);
+					real = formattedToken.toFloat();
 					stack.add(real);
 				}
 			}			
 		}
+		
 		if (stack.size() == 1) {
-			return stack[0].toString();
+			if (stack[0] > Math.pow(10, 12) or stack[0] < -Math.pow(10, 12)) {
+				return stack[0].format("%.7E");
+			} else {
+				return stack[0].toString();
+			}
 		} else {
 			return "-";
 		}

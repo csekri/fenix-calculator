@@ -1,8 +1,9 @@
 <strings>
     <string id="AppName">Math Calculator</string>
     <string id="StartPrompt">Prefix Calculator\nPress START</string>
-    <string id="MenuEnter">Enter</string>
+    <string id="MenuEnter">New Number</string>
     <string id="MenuClear">Clear</string>
+    <string id="MenuDelete">&#60;- Delete</string>
     <string id="MenuInvert">±</string>
     <string id="MenuAdd">+</string>
     <string id="MenuSubtract">-</string>
@@ -12,20 +13,20 @@
     <string id="MenuPower">Power</string>
     <string id="MenuE">e</string>
     <string id="MenuLogarithm">Logarithms</string>
-    <string id="MenuLog10">Base 10 logarithm</string>
-    <string id="MenuLogN">Natural logarithm</string>
-    <string id="MenuLog">2 op, base fst input</string>
+    <string id="MenuLog10">Base 10 Log</string>
+    <string id="MenuLogN">Natural Log</string>
+    <string id="MenuLog">Log_a b</string>
     <string id="MenuExit">Exit</string>
     <string id="MenuPre">Prefix</string>
     <string id="MenuPost">Postfix</string>
     <string id="MenuTrigonometry">Trigonometry</string>
     <string id="MenuPi">Pi</string>
-    <string id="MenuSin">sin</string>
-    <string id="MenuCos">cos</string>
-    <string id="MenuTan">tan</string>
-    <string id="MenuASin">asin</string>
-    <string id="MenuACos">acos</string>
-	<string id="MenuATan">atan</string>
-	<string id="MenuDegRad">deg -> rad</string>
-	<string id="MenuRadDeg">rad -> deg</string>
+    <string id="MenuSin">Sin</string>
+    <string id="MenuCos">Cos</string>
+    <string id="MenuTan">Tan</string>
+    <string id="MenuASin">Asin</string>
+    <string id="MenuACos">Acos</string>
+	<string id="MenuATan">Atan</string>
+	<string id="MenuDegRad">Deg -> Rad</string>
+	<string id="MenuRadDeg">Rad -> Deg</string>
 </strings>
