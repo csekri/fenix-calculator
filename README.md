@@ -1,43 +1,21 @@
 Scientific Calculator for Fenix & Forerunner watches
 
-Uses Prefix or Postfix notations. Can switch between the two.
+Ever wondered how a smartwatch with 5 buttons can be used as a calculator? If yes then this app is probably for you.
+
+This full-featured calculator can be useful when shopping, doing math homework, changing currency etc. The result is evaluated on the go when the algorithm recognises a meaningful expression, hence partial results are displayed when typing. There are three evaluation modes: Traditional/Postfix/Prefix. An expression can expand to multiple lines.
+
+IMPORTANT: EXIT can be found in the menu (press and hold UP/MENU button)!!!
 
 USAGE
 
-   - Up button long press: access to Exit, switch between Prefix and Postfix modes.
+   - MENU long press: access to Exit, switch between Traditional, Prefix and Postfix modes.
 
-   - Back button press: access to the math operations, math constants, delete and clear.
+   - Back button: access to the math operations, math constants, delete and clear.
 
-   - Start button press: add new digit to the number.
+   - Start button: add new digit to the last number or add a new number to the expression.
 
-   - Up/down button press: rotate between digits and decimal point.
-
-FEATURES
-
-   - postfix or prefix notations,
-   
-   - mathematical constants: pi, e,
-   
-   - input can expand to up to four lines, allowing longer calculations.
-
-PREFIX EXAMPLES
-
-   - Convert 10% gradient into degrees:
-     "raddeg atan 0.1".
-
-   - ((1+sqrt(5)) / 2):
-     "/ + 1 sqrt 5 2".
-
-POSTFIX EXAMPLES
-
-   - Add up multiple numbers:
-     "1.2 3.4 101 39.9 + + +".
-
-   - (2^2+2^3+2^4):
-      "2 2 ^ 2 3 ^ 2 4 ^ + +".
+   - Up/down button: rotate between digits and decimal point.
 
 NOTE
 
    Idea for the user interface was taken from https://github.com/rvk/rpncalc.
-
-

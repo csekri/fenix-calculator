@@ -172,5 +172,116 @@ function postfixTests() {
 	// sqrt(3*3+4*4)
 	stack = ["3", "2", "^", "4", "2", "^", "+", "sqrt"];
 	Test.assertEqual(toleranceTest(calc.evalPost(stack), "5"), true);
+}
 	
+	
+function infixTests() {
+	var calc = new Calc();
+
+	// only a number
+	var stack = ["10"];
+	Test.assertEqual(toleranceTest(calc.evalInfix(stack), "10"), true);
+	
+	stack = ["1", "+", "2"];
+	Test.assertEqual(toleranceTest(calc.evalInfix(stack), "3"), true);
+	
+	stack = ["1", "+", "2.2"];
+	Test.assertEqual(toleranceTest(calc.evalInfix(stack), "3.2"), true);
+	
+	stack = ["10", "-", "4"];
+	Test.assertEqual(toleranceTest(calc.evalInfix(stack), "6"), true);
+	
+	stack = ["3", "*", "4"];
+	Test.assertEqual(toleranceTest(calc.evalInfix(stack), "12"), true);
+	
+	stack = ["5", "/", "3"];
+	Test.assertEqual(toleranceTest(calc.evalInfix(stack), "1.666666"), true);
+	
+	stack = ["7", "/", "0"];
+	Test.assertEqual(calc.evalInfix(stack), "nan");
+	
+	stack = ["2", "log", "1024"];
+	Test.assertEqual(toleranceTest(calc.evalInfix(stack), "10"), true);
+	
+	stack = ["-", "4"];
+	Test.assertEqual(toleranceTest(calc.evalInfix(stack), "-4"), true);
+	
+	stack = ["sqrt", "(", "4", ")"];
+	Test.assertEqual(toleranceTest(calc.evalInfix(stack), "2"), true);
+
+	stack = ["sin", "(", "1", ")"];
+	Test.assertEqual(toleranceTest(calc.evalInfix(stack), "0.84147"), true);
+
+	stack = ["cos", "(", "1", ")"];
+	Test.assertEqual(toleranceTest(calc.evalInfix(stack), "0.5403"), true);
+
+	stack = ["tan", "(", "1", ")"];
+	Test.assertEqual(toleranceTest(calc.evalInfix(stack), "1.5574"), true);
+
+	stack = ["asin", "(", "0.5", ")"];
+	Test.assertEqual(toleranceTest(calc.evalInfix(stack), "0.52359"), true);
+
+	stack = ["acos", "(", "0.5", ")"];
+	Test.assertEqual(toleranceTest(calc.evalInfix(stack), "1.04719"), true);
+
+	stack = ["atan", "(", "0.5", ")"];
+	Test.assertEqual(toleranceTest(calc.evalInfix(stack), "0.463647"), true);
+
+	stack = ["ln", "(", "10", ")"];
+	Test.assertEqual(toleranceTest(calc.evalInfix(stack), "2.30258"), true);
+
+	stack = ["lg", "(", "31", ")"];
+	Test.assertEqual(toleranceTest(calc.evalInfix(stack), "1.4914"), true);
+
+	stack = ["raddeg", "(", "2", ")"];
+	Test.assertEqual(toleranceTest(calc.evalInfix(stack), "114.592"), true);
+
+	stack = ["degrad", "(", "3", ")"];
+	Test.assertEqual(toleranceTest(calc.evalInfix(stack), "0.0523599"), true);
+
+	stack = ["pi"];
+	Test.assertEqual(toleranceTest(calc.evalInfix(stack), "3.1415926535"), true);
+
+	stack = ["e"];
+	Test.assertEqual(toleranceTest(calc.evalInfix(stack), "2.71828"), true);
+	
+	// complicated
+	stack = ["1.2", "+", "2.4", "+", "3.6", "+", "4.8", "+", "6.0"];
+	Test.assertEqual(toleranceTest(calc.evalInfix(stack), "18.0"), true);
+
+	// sqrt(3*3+4*4)
+	stack = ["sqrt", "(", "3", "^", "2", "+", "4", "^", "2", ")"];
+	Test.assertEqual(toleranceTest(calc.evalInfix(stack), "5"), true);
+	
+	stack = ["1", "+", "2"];
+	Test.assertEqual(toleranceTest(calc.evalInfix(stack), "3"), true);
+
+	stack = ["(", "(", "2", ")", ")"];
+	Test.assertEqual(toleranceTest(calc.evalInfix(stack), "2"), true);
+
+	stack = ["2", "+", "6", "*", "7"];
+	Test.assertEqual(toleranceTest(calc.evalInfix(stack), "44"), true);
+
+	stack = ["(", "2", "+", "6", ")", "*", "7"];
+	Test.assertEqual(toleranceTest(calc.evalInfix(stack), "56"), true);
+
+	stack = ["sqrt", "(", "3", "+", "6", ")", "*", "7"];
+	Test.assertEqual(toleranceTest(calc.evalInfix(stack), "21"), true);
+
+	stack = ["-", "3"];
+	Test.assertEqual(toleranceTest(calc.evalInfix(stack), "-3"), true);
+
+	stack = ["-", "(", "2", "+", "3", ")"];
+	Test.assertEqual(toleranceTest(calc.evalInfix(stack), "-5"), true);
+
+	stack = ["(", "-", "2", "+", "3", ")"];
+	Test.assertEqual(toleranceTest(calc.evalInfix(stack), "1"), true);
+
+	stack = ["sin", "(", "20", ")", "^", "2", "+", "cos", "(", "20", ")", "^", "2"];
+	Test.assertEqual(toleranceTest(calc.evalInfix(stack), "1"), true);
+
+	stack = ["1", "+", "2", "*", "3", "^", "5"];
+	Test.assertEqual(toleranceTest(calc.evalInfix(stack), "487"), true);
+
+
 }

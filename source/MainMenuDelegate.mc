@@ -19,15 +19,21 @@ class MainMenuDelegate extends Ui.MenuInputDelegate {
 				Ui.popView(Ui.SLIDE_IMMEDIATE);
 			}
 		}
-		else if (item == :pre and !view.computeMode) {
-			view.setComputeMode(true);
+		else if (item == :pre and view.computeMode != 1) {
+			view.setComputeMode(1);
 			view.stack = [];
 			view.isInputFull = false;
 	  		Ui.requestUpdate();
 		}
-		else if (item == :post and view.computeMode) {
-			view.setComputeMode(false);
+		else if (item == :post and view.computeMode != 2) {
+			view.setComputeMode(2);
 			view.stack = ["0"];
+			view.isInputFull = false;
+	  		Ui.requestUpdate();
+		}
+		else if (item == :inf and view.computeMode != 0) {
+			view.setComputeMode(0);
+			view.stack = [];
 			view.isInputFull = false;
 	  		Ui.requestUpdate();
 		}

@@ -29,4 +29,7 @@
 	<string id="MenuATan">Atan</string>
 	<string id="MenuDegRad">Deg -> Rad</string>
 	<string id="MenuRadDeg">Rad -> Deg</string>
+	<string id="MenuBrLeft">(</string>
+	<string id="MenuBrRight">)</string>
+	<string id="MenuInfix">Traditional</string>
 </strings>

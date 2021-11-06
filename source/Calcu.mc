@@ -23,6 +23,16 @@ class Calc {
 		if (str.substring(0,1).equals(".")) { return "0" + str; }
 		return str;
 	}
+	function isBinaryOPExceptMinus(token) {
+		return token.equals("+") or token.equals("*") or token.equals("/")
+		     or token.equals("^") or token.equals("log");
+	}
+	function isUnaryOPExceptMinus(token) {
+		return token.equals("sqrt") or token.equals("sin") or token.equals("cos")
+		     or token.equals("tan") or token.equals("asin") or token.equals("acos")
+		     or token.equals("atan") or token.equals("ln") or token.equals("lg")
+		     or token.equals("raddeg") or token.equals("degrad");
+	}
 	
 	
 	// evaluates prefix notation expression
@@ -32,9 +42,7 @@ class Calc {
 		    var token = tokens[tokens.size() - i - 1];
 		    
 		    // binary operators
-		    if (token.equals("+") or token.equals("-") or token.equals("*") or token.equals("/")
-		     or token.equals("^") or token.equals("log") or token.equals("+")
-		     or token.equals("+") or token.equals("+") or token.equals("+")) {
+		    if (Calc.isBinaryOPExceptMinus(token) or token.equals("-")) {
 		        if (stack.size() < 2) { return "-"; }
 		    	var pop = stack[stack.size()-1];
 		    	
@@ -66,10 +74,7 @@ class Calc {
 			}
 			
 			// unary operators
-		    if (token.equals("(-)") or token.equals("sqrt") or token.equals("sin") or token.equals("cos")
-		     or token.equals("tan") or token.equals("asin") or token.equals("acos")
-		     or token.equals("atan") or token.equals("ln") or token.equals("lg")
-		     or token.equals("raddeg") or token.equals("degrad")) {
+		    if (Calc.isUnaryOPExceptMinus(token) or token.equals("(-)")) {
 		        if (stack.size() < 1) { return "-"; }
 			    if (token.equals("(-)")) {
 			        stack[stack.size()-1] *= -1;}
@@ -158,9 +163,7 @@ class Calc {
 		    var token = tokens[i];
 		    
 		    // binary operators
-		    if (token.equals("+") or token.equals("-") or token.equals("*") or token.equals("/")
-		     or token.equals("^") or token.equals("log") or token.equals("+")
-		     or token.equals("+") or token.equals("+") or token.equals("+")) {
+		    if (Calc.isBinaryOPExceptMinus(token) or token.equals("-")) {
 		        if (stack.size() < 2) { return "-"; }
 		    	var pop = stack[stack.size()-1];
 		    	
@@ -192,10 +195,7 @@ class Calc {
 			}
 			
 			// unary operators
-		    if (token.equals("(-)") or token.equals("sqrt") or token.equals("sin") or token.equals("cos")
-		     or token.equals("tan") or token.equals("asin") or token.equals("acos")
-		     or token.equals("atan") or token.equals("ln") or token.equals("lg")
-		     or token.equals("raddeg") or token.equals("degrad")) {
+		    if (Calc.isUnaryOPExceptMinus(token) or token.equals("(-)")) {
 		        if (stack.size() < 1) { return "-"; }
 			    if (token.equals("(-)")) {
 			        stack[stack.size()-1] *= -1;}
@@ -270,6 +270,103 @@ class Calc {
 		} else {
 			return "-";
 		}
+	}
+	
+	function dealWithUnaryMinus(tokens) {
+		var result = tokens;
+		var tmp;
+		if (tokens[0].equals("-")) {
+			tmp = ["0"];
+			tmp.addAll(result);
+			result = tmp;
+		}
+		var length;
+		while (true) {
+			length = result.size();
+			for (var i = 1; i < result.size(); i += 1){
+				if (result[i-1].equals("(") and result[i].equals("-")) {
+					tmp = result.slice(0, i);
+					tmp.add("0");
+					tmp.addAll(result.slice(i, null));
+					result = tmp;
+				}
+				if (Calc.isBinaryOPExceptMinus(result[i-1]) and result[i].equals("-")) {
+					tmp = result.slice(0, i);
+					tmp.add("0");
+					tmp.addAll(result.slice(i, null));
+					result = tmp;
+				}
+				
+			}
+			if (result.size() == length) {
+				return result;
+			}
+		}
+	}
+	
+	function evalInfix(tokens) {
+		if (tokens.size() == 0) {
+			return "-";
+		}
+		var op_stack = [];
+		var out_queue = [];
+		var pop = "";
+		var PRECEDENCE = { "+" => 1, "-" => 1, "*" => 2, "/" => 2, "^" => 3, "log" => 4, "(" => -1, ")" => -1 };
+		tokens = Calc.dealWithUnaryMinus(tokens);
+		for (var i = 0; i < tokens.size(); i += 1){
+		    var token = tokens[i];
+		    
+		    if (Calc.isUnaryOPExceptMinus(token)) {
+		    	op_stack.add(token);
+		    }
+		    else if (Calc.isBinaryOPExceptMinus(token) or token.equals("-")) {
+		    	while (op_stack.size() > 0 and !Calc.isUnaryOPExceptMinus(op_stack[op_stack.size()-1]) and PRECEDENCE[op_stack[op_stack.size()-1]] >= PRECEDENCE[token]) {
+		    		pop = op_stack[op_stack.size()-1];
+		    		op_stack = op_stack.slice(0, op_stack.size()-1);
+		    		out_queue.add(pop);
+		    	}
+		    	op_stack.add(token);
+		    }
+		    else if (token.equals("(")) {
+		    	op_stack.add(token);
+		    }
+		    else if (token.equals(")")) {
+	    		if (op_stack.size() == 0) {
+	    			return "-";
+	    		}
+		    	while (!op_stack[op_stack.size()-1].equals("(")) {
+		    		if (op_stack.size() == 0) {
+		    			return "-";
+		    		}
+		    		pop = op_stack[op_stack.size()-1];
+		    		op_stack = op_stack.slice(0, op_stack.size()-1);
+		    		out_queue.add(pop);
+		    	}
+	    		op_stack = op_stack.slice(0, op_stack.size()-1); // pop left parenthesis
+		    	if (op_stack.size() > 0 and Calc.isUnaryOPExceptMinus(op_stack[op_stack.size()-1])) {
+		    		pop = op_stack[op_stack.size()-1];
+		    		op_stack = op_stack.slice(0, op_stack.size()-1);
+		    		out_queue.add(pop);
+		    	}
+		    }
+		    else if (Calc.isDigitPlus(token.substring(0,1)) or token.equals("e") or token.equals("pi")) {
+					out_queue.add(token);
+		    }
+		}
+		
+		while (op_stack.size() > 0) {
+    		pop = op_stack[op_stack.size()-1];
+    		op_stack = op_stack.slice(0, op_stack.size()-1);
+		
+			if (pop.equals("(")) {
+		    	return "-";
+		    }
+		    if (!pop.equals(")")) {
+	    		out_queue.add(pop);
+	    	}
+			
+		}
+		return Calc.evalPost(out_queue);
 	}
 }
 

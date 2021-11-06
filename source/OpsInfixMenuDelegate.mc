@@ -2,7 +2,7 @@
 
 using Toybox.WatchUi as Ui;
 
-class OpsMenuDelegate extends Ui.MenuInputDelegate {
+class OpsInfixMenuDelegate extends Ui.MenuInputDelegate {
 	var view;
 	
 	// Constructor.
@@ -20,46 +20,33 @@ class OpsMenuDelegate extends Ui.MenuInputDelegate {
 		}
 		//1 END
 		
-		//2 BEGIN: if enter is selected in postfix mode with non-empty stack
-		if (item == :enter and view.computeMode == 2) {
-				view.stack.add("0");
-		}
-		//2 END
-		//3 BEGIN: if enter is selected in prefix mode with non-empty stack
-		if (item == :enter and view.computeMode == 1) {
-			if (view.stack.size() > 0){
-				view.stack.add("0");
-			}
-		}
-		//3 END
 		if (item == :clear) {
 			view.isInputFull = false;
-			if (view.computeMode == 1) {
-				view.stack = [];			
-			} else if (view.computeMode == 2) {
-				view.stack = ["0"];
-			}
+			view.stack = [];
 		} else if (item == :delete) {
 			view.isInputFull = false;
 			if (view.stack.size() > 0) {
-				if (view.computeMode == 2 and view.stack.size() == 1) {
-					view.stack = ["0"];
+				if (view.stack.size() > 1 and view.stack[view.stack.size()-1].equals("(") and Calc.isUnaryOPExceptMinus(view.stack[view.stack.size()-2])) {
+					view.stack = view.stack.slice(null, view.stack.size()-2);
 				} else {
 					view.stack = view.stack.slice(null, view.stack.size()-1);
 				}
 			}
+		} else if (item == :leftbr) {
+			view.stack.add("(");
+		} else if (item == :rightbr) {
+			view.stack.add(")");
 		} else if (item == :add) {
 			view.stack.add("+");
 		} else if (item == :subtract) {
 			view.stack.add("-");
-		} else if (item == :invert) {
-			view.stack.add("(-)");
 		} else if (item == :multiply) {
 			view.stack.add("*");
 		} else if (item == :divide) {
 			view.stack.add("/");
 		} else if (item == :sqrt) {
 			view.stack.add("sqrt");
+			view.stack.add("(");
 		} else if (item == :power) {
 			view.stack.add("^");
 		} else if (item == :e) {
@@ -75,9 +62,11 @@ class OpsMenuDelegate extends Ui.MenuInputDelegate {
 			Ui.popView(Ui.SLIDE_IMMEDIATE);
 		} else if (item == :log10) {
 			view.stack.add("lg");
+			view.stack.add("(");
 			Ui.popView(Ui.SLIDE_IMMEDIATE);
 		} else if (item == :logn) {
 			view.stack.add("ln");
+			view.stack.add("(");
 			Ui.popView(Ui.SLIDE_IMMEDIATE);
 		} else if (item == :trigonometry) {
 			Ui.pushView(new Rez.Menus.TrigonometryMenu(), self, Ui.SLIDE_IMMEDIATE);
@@ -89,27 +78,35 @@ class OpsMenuDelegate extends Ui.MenuInputDelegate {
 			Ui.popView(Ui.SLIDE_IMMEDIATE);
 		} else if (item == :sin) {
 			view.stack.add("sin");
+			view.stack.add("(");
 			Ui.popView(Ui.SLIDE_IMMEDIATE);
 		} else if (item == :cos) {
 			view.stack.add("cos");
+			view.stack.add("(");
 			Ui.popView(Ui.SLIDE_IMMEDIATE);
 		} else if (item == :tan) {
 			view.stack.add("tan");
+			view.stack.add("(");
 			Ui.popView(Ui.SLIDE_IMMEDIATE);
 		} else if (item == :asin) {
 			view.stack.add("asin");
+			view.stack.add("(");
 		    Ui.popView(Ui.SLIDE_IMMEDIATE);
 		} else if (item == :acos) {
 			view.stack.add("acos");
+			view.stack.add("(");
 		    Ui.popView(Ui.SLIDE_IMMEDIATE);
 		} else if (item == :atan) {
 			view.stack.add("atan");
+			view.stack.add("(");
 		    Ui.popView(Ui.SLIDE_IMMEDIATE);
 		} else if (item == :degrad) {
 			view.stack.add("degrad");
+			view.stack.add("(");
 			Ui.popView(Ui.SLIDE_IMMEDIATE);
 		} else if (item == :raddeg) {
 			view.stack.add("raddeg");
+			view.stack.add("(");
 			Ui.popView(Ui.SLIDE_IMMEDIATE);
 		}
 		return true;

@@ -14,9 +14,10 @@ class PrefixCalculatorDelegate extends Ui.BehaviorDelegate {
 		// constructor of parent class
 		Ui.BehaviorDelegate.initialize();
 		view = new PrefixCalculatorView();
-		// uncomment next two lines to run the tests
+		// uncomment next two lines to run the tests, on lower-end devices it might trigger execution timeout
 //		prefixTests();
 //		postfixTests();
+//		infixTests();
 		Ui.pushView(view, self, Ui.SLIDE_IMMEDIATE);
 	}
 
@@ -46,7 +47,7 @@ class PrefixCalculatorDelegate extends Ui.BehaviorDelegate {
 		}
 		
 		// if in postfix mode
-		if (!view.computeMode) {
+		if (view.computeMode == 2) {
 			// if stack is empty add new number as 0
 			if (view.stack.size() == 0){
 				view.stack.add("0");
@@ -59,10 +60,23 @@ class PrefixCalculatorDelegate extends Ui.BehaviorDelegate {
 			}
 		}
 		// if in prefix mode
-		if (view.computeMode) {
+		if (view.computeMode == 1) {
 			// if stack is empty do nothing because no expression starts with number
 			if (view.stack.size() == 0){
 			
+			// else if the last added item is number (might be gramatically incorrect)
+			} else if (view.Calc.isDigitPlus(view.stack[view.stack.size()-1].substring(0,1))) {
+				view.stack[view.stack.size()-1] += "0";
+			// otherwise simply add 0, it start a new number edit
+			} else {
+				view.stack.add("0");
+			}
+		}
+		// if in infix mode
+		if (view.computeMode == 0) {
+			// if stack is empty add new number as 0
+			if (view.stack.size() == 0){
+				view.stack.add("0");
 			// else if the last added item is number (might be gramatically incorrect)
 			} else if (view.Calc.isDigitPlus(view.stack[view.stack.size()-1].substring(0,1))) {
 				view.stack[view.stack.size()-1] += "0";
@@ -85,7 +99,11 @@ class PrefixCalculatorDelegate extends Ui.BehaviorDelegate {
 			view.firstRevealMade = true;
 		}
 		// opens operations view
-		Ui.pushView(new Rez.Menus.OpsMenu(), new OpsMenuDelegate(view), Ui.SLIDE_IMMEDIATE);
+		if (view.computeMode == 0) {
+			Ui.pushView(new Rez.Menus.OpsInfixMenu(), new OpsInfixMenuDelegate(view), Ui.SLIDE_IMMEDIATE);
+		} else {
+			Ui.pushView(new Rez.Menus.OpsMenu(), new OpsMenuDelegate(view), Ui.SLIDE_IMMEDIATE);		
+		}
     	return true;
     }
 
@@ -97,8 +115,8 @@ class PrefixCalculatorDelegate extends Ui.BehaviorDelegate {
 			Ui.pushView(view, self, Ui.SLIDE_IMMEDIATE);
 			view.firstRevealMade = true;
 		}
-		// early exit if in prefix mode with empty stack (we do not want to add a number)
-		if (view.computeMode and view.stack.size() == 0) {
+		// early exit stack is empty
+		if (view.stack.size() == 0) {
 			return true;
 		}
     	
@@ -134,8 +152,8 @@ class PrefixCalculatorDelegate extends Ui.BehaviorDelegate {
 			view.firstRevealMade = true;
 		}
 		
-		// early exit if in prefix mode with empty stack
-		if (view.computeMode and view.stack.size() == 0) {
+		// early exit stack is empty
+		if (view.stack.size() == 0) {
 			return true;
 		}
     	
