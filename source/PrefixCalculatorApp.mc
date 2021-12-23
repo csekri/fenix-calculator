@@ -18,7 +18,10 @@ class PrefixCalculatorApp extends Application.AppBase {
 
     // Return the initial view of your application here
     function getInitialView() as Array<Views or InputDelegates>? {
-        return [ new PrefixCalculatorView(), new PrefixCalculatorDelegate() ] as Array<Views or InputDelegates>;
+    	if (!System.getDeviceSettings().isTouchScreen) {
+	        return [ new PrefixCalculatorView(), new PrefixCalculatorDelegate() ] as Array<Views or InputDelegates>;
+    	}
+        return [ new PrefixCalculatorView(), new InputDelegate() ] as Array<Views or InputDelegates>;
     }
 
 }

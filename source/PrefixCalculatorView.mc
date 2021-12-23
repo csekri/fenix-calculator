@@ -35,19 +35,32 @@ class PrefixCalculatorView extends Ui.View {
 		self.computeMode = computeMode;
 	}
 	
+	function min(a, b) {
+		if (a < b) {
+			return a;
+		}
+		return b;
+	}
+	
     // Update the view.
     // Draws everything on canvas and also evaluates the maths expression.
     function onUpdate(dc) {
     	var screenWidth = dc.getWidth();
-    	var screenHeight = dc.getHeight();
+    	var screenHeight = min(dc.getHeight(), 1.3 * screenWidth);
     	
     	// sets drawing colour white, background color black
         dc.setColor(Gfx.COLOR_WHITE, Gfx.COLOR_BLACK);
         // clear the window to full black colour
         dc.clear();
         
-        // draws the top bottom segment
+        // draws the bottom horizontal segment
         dc.drawLine(screenWidth * 0.01, screenHeight * 0.68, screenWidth * 0.99, screenHeight * 0.68);
+        
+        // if touchscreen device draws Digit and Ops buttons
+        if (System.getDeviceSettings().isTouchScreen) {
+        	dc.drawText(screenWidth * 0.05, screenHeight * 0.64, Gfx.FONT_XTINY, "D", Gfx.TEXT_JUSTIFY_LEFT);
+        	dc.drawText(screenWidth * 0.95, screenHeight * 0.64, Gfx.FONT_XTINY, "O", Gfx.TEXT_JUSTIFY_RIGHT);
+        }
         // draws the top horizontal segment
         dc.drawLine(screenWidth * 0.01, screenHeight * 0.2, screenWidth * 0.99, screenHeight * 0.2);
         
