@@ -6,8 +6,10 @@ using Toybox.WatchUi as Ui;
 using Toybox.Lang;
 using Toybox.System;
 
+
 class PrefixCalculatorDelegate extends Ui.BehaviorDelegate {
 	var view; // class object responsible for the graphical appearance
+	
 	
 	// Constructor.
 	function initialize() {	

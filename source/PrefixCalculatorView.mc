@@ -54,15 +54,20 @@ class PrefixCalculatorView extends Ui.View {
         dc.clear();
         
         // draws the bottom horizontal segment
-        dc.drawLine(screenWidth * 0.01, screenHeight * 0.68, screenWidth * 0.99, screenHeight * 0.68);
-        
-        // if touchscreen device draws Digit and Ops buttons
         if (System.getDeviceSettings().isTouchScreen) {
-        	dc.drawText(screenWidth * 0.05, screenHeight * 0.64, Gfx.FONT_XTINY, "D", Gfx.TEXT_JUSTIFY_LEFT);
-        	dc.drawText(screenWidth * 0.95, screenHeight * 0.64, Gfx.FONT_XTINY, "O", Gfx.TEXT_JUSTIFY_RIGHT);
+        	dc.drawLine(screenWidth * 0.13, screenHeight * 0.68, screenWidth * 0.87, screenHeight * 0.68);
+        } else {
+        	dc.drawLine(screenWidth * 0.01, screenHeight * 0.68, screenWidth * 0.99, screenHeight * 0.68);        	
         }
+        
+    	// if touchscreen device draws Digit and Ops buttons
+        if (System.getDeviceSettings().isTouchScreen) {
+        	dc.drawText(screenWidth * 0.05, screenHeight * 0.62, Gfx.FONT_TINY, "D", Gfx.TEXT_JUSTIFY_LEFT);
+        	dc.drawText(screenWidth * 0.95, screenHeight * 0.62, Gfx.FONT_TINY, "O", Gfx.TEXT_JUSTIFY_RIGHT);
+        }
+        
         // draws the top horizontal segment
-        dc.drawLine(screenWidth * 0.01, screenHeight * 0.2, screenWidth * 0.99, screenHeight * 0.2);
+    	dc.drawLine(screenWidth * 0.01, screenHeight * 0.2, screenWidth * 0.99, screenHeight * 0.2);        	
         
         //1 BEGIN: writes the computation mode on the screen
         if (self.computeMode == 0) {
@@ -88,16 +93,21 @@ class PrefixCalculatorView extends Ui.View {
         } else if (self.computeMode == 0) { // infix mode
         	expr = Calc.evalInfix(stack);
         }
+        expr = "= " + expr;
         //2 END
         
         //3 BEGIN: writes "=" sign plus the result of the calculation (wraps result if too long)
-        if (expr.length() > 14) {
-	    	dc.drawText(screenWidth * 0.15, screenHeight * 0.70, Gfx.FONT_TINY, "= " + expr.substring(0, 14), Gfx.TEXT_JUSTIFY_LEFT); // result text
-	    	dc.drawText(screenWidth * 0.15, screenHeight * 0.80, Gfx.FONT_TINY, "   " + expr.substring(14, expr.length()), Gfx.TEXT_JUSTIFY_LEFT); // result text
-        } else {
-    		dc.drawText(screenWidth * 0.15, screenHeight * 0.70, Gfx.FONT_TINY, "= " + expr, Gfx.TEXT_JUSTIFY_LEFT); // result text   	
+        var rowCharacterCount = 0;
+        while (rowCharacterCount < expr.length() and dc.getTextWidthInPixels(expr.substring(0, rowCharacterCount), Gfx.FONT_TINY) <= screenWidth * 0.6) {
+        		rowCharacterCount += 1;
     	}
-    	//3 END
+        if (rowCharacterCount < expr.length()) {
+	    	dc.drawText(screenWidth * 0.15, screenHeight * 0.70, Gfx.FONT_TINY, expr.substring(0, rowCharacterCount), Gfx.TEXT_JUSTIFY_LEFT); // result text
+	    	dc.drawText(screenWidth * 0.15, screenHeight * 0.80, Gfx.FONT_TINY, "   " + expr.substring(rowCharacterCount, expr.length()), Gfx.TEXT_JUSTIFY_LEFT); // result text
+        } else {
+    		dc.drawText(screenWidth * 0.15, screenHeight * 0.70, Gfx.FONT_TINY, expr, Gfx.TEXT_JUSTIFY_LEFT); // result text   	
+    	}
+    	//3 END    	
     	
     	var cumstring = ""; // stack converted into text
     	
@@ -124,7 +134,7 @@ class PrefixCalculatorView extends Ui.View {
         
         //5 BEGIN: wraps text and displays it along with the digit edit special character
         while (cumstring.length() > 0) {
-        	var rowCharacterCount = 1;
+        	rowCharacterCount = 1;
         	while (rowCharacterCount < cumstring.length() and dc.getTextWidthInPixels(cumstring.substring(0, rowCharacterCount), Gfx.FONT_TINY) <= screenWidth * screenWidthRatio) {
         		rowCharacterCount += 1;
         	}

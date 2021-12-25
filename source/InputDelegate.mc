@@ -7,6 +7,7 @@ using Toybox.Math;
 class InputDelegate extends Ui.InputDelegate {
 	var view;
 	
+	
 	// Constructor.
 	function initialize() {	
 		// constructor of parent class
@@ -47,7 +48,6 @@ class InputDelegate extends Ui.InputDelegate {
 		}
 		return -1;
 	}
-	
 	
 	
 	// Minimum between a and b.

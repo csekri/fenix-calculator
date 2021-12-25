@@ -1,13 +1,12 @@
-Scientific Calculator for Fenix & Forerunner watches
-Ever wondered how a smartwatch with 5 buttons can be used as a calculator? If yes then this app is probably for you.
+Calculate everywhere on your wrist with a scientific calculator available for both physical button and touchscreen devices.
 
-This full-featured calculator can be useful when shopping, doing math homework, changing currency etc. The result is evaluated on the go when the algorithm recognises a meaningful expression, hence partial results are displayed when typing. There are three evaluation modes: Traditional/Postfix/Prefix. An expression can expand into multiple lines.
+This full-featured calculator can be useful when shopping, doing math homework, changing currency etc. There are three evaluation modes: Traditional/Postfix/Prefix. An expression can expand into multiple lines.
 
 IMPORTANT: EXIT can be found in the menu (press and hold UP/MENU button)!!!
 
-USAGE ON NO TOUCHSCREEN DEVICES
+#### USAGE ON NON-TOUCHSCREEN DEVICES ####
 
-- MENU (press and hold up button): access to Exit, switch between Traditional, Prefix and Postfix modes.
+- Menu (press and hold up button): access to Exit, switch between Traditional, Prefix and Postfix modes.
 
 - Back button: access to the math operations, math constants, delete and clear.
 
@@ -15,9 +14,9 @@ USAGE ON NO TOUCHSCREEN DEVICES
 
 - Up/down button: rotate between digits and decimal point.
 
-USAGE ON TOUCHSCREEN DEVICES
+#### USAGE ON TOUCHSCREEN DEVICES ####
 
-- Back: usually exits the app
+- Back: usually exits the app (depending on device).
 
 - Tap on the top label (Traditional/Prefix/Postfix): access to Exit, switch between Traditional, Prefix and Postfix modes.
 
@@ -27,8 +26,10 @@ USAGE ON TOUCHSCREEN DEVICES
 
 - Swipe up/down: rotate between digits and decimal point.
 
-NOTE
+#### NOTES ####
 
 Idea for the user interface was taken from https://github.com/rvk/rpncalc.
 
 In Traditional mode `log` is implemented as a binary function e.g. 2log1024 = 10.
+
+Floating point calculations are accurate up to 5 decimal places.
