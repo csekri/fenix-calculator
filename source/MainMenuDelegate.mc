@@ -27,12 +27,18 @@ class MainMenuDelegate extends Ui.MenuInputDelegate {
 		}
 		else if (item == :post and view.computeMode != 2) {
 			view.setComputeMode(2);
-			view.stack = ["0"];
+			view.stack = [];
 			view.isInputFull = false;
 	  		Ui.requestUpdate();
 		}
 		else if (item == :inf and view.computeMode != 0) {
 			view.setComputeMode(0);
+			view.stack = [];
+			view.isInputFull = false;
+	  		Ui.requestUpdate();
+		}
+		else if (item == :poststack and view.computeMode != 3) {
+			view.setComputeMode(3);
 			view.stack = [];
 			view.isInputFull = false;
 	  		Ui.requestUpdate();

@@ -16,7 +16,7 @@ class Calc {
 	
 	// same as isDigit but includes "." too
 	function isDigitPlus(token) {
-		return Calc.isDigit(token) or token.equals(".");
+		return Calc.isDigit(token) or token.equals(".") or token.equals("-");
 	}
 	function formatNumber(str) {
 		if (str.equals(".")) { return "0.0"; }
@@ -304,6 +304,16 @@ class Calc {
 		}
 	}
 	
+//	function bracketPairCriterium(tokens) {
+//		leftBr = 0;
+//		rightBr = 0;
+//		for (var i=0; i<tokens.size(); i += 1) {
+//			if tokens.equals(")") {
+//				add
+//			}
+//		}
+//	}
+	
 	function evalInfix(tokens) {
 		if (tokens.size() == 0) {
 			return "-";
@@ -335,12 +345,12 @@ class Calc {
 	    			return "-";
 	    		}
 		    	while (!op_stack[op_stack.size()-1].equals("(")) {
-		    		if (op_stack.size() == 0) {
-		    			return "-";
-		    		}
 		    		pop = op_stack[op_stack.size()-1];
 		    		op_stack = op_stack.slice(0, op_stack.size()-1);
 		    		out_queue.add(pop);
+		    		if (op_stack.size() == 0) {
+		    			break;
+		    		}
 		    	}
 	    		op_stack = op_stack.slice(0, op_stack.size()-1); // pop left parenthesis
 		    	if (op_stack.size() > 0 and Calc.isUnaryOPExceptMinus(op_stack[op_stack.size()-1])) {
@@ -367,6 +377,28 @@ class Calc {
 			
 		}
 		return Calc.evalPost(out_queue);
+	}
+	
+	function evalRpnStack(tokens) {
+		var returnList = [];
+		returnList.addAll(tokens);
+		if (tokens.size() < 2) {
+			return returnList;
+		}
+		for (var i=2; i <= 3; i++) {
+			if (i == 3 and tokens.size() < 3){
+				return returnList;
+			}
+			var tokenSlice = tokens.slice(tokens.size()-i, tokens.size());
+			var evalEnd = Calc.evalPost(tokenSlice);
+			if (!evalEnd.equals("-")) {
+				returnList = tokens.slice(0, tokens.size()-i+1);
+				returnList[returnList.size()-1] = evalEnd;
+				System.println(returnList);
+				return returnList;
+			}
+		}
+		return returnList;
 	}
 }
 

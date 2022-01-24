@@ -19,7 +19,7 @@ class OnMethods {
 	
 	
 	// Add new digit or number.
-	function OnSelect(view, delegate) {
+	function OnSelect(view, digit, delegate) {
 		// early exit if four rows are full with input
 	    if (view.isInputFull) {
     		return true;
@@ -30,45 +30,18 @@ class OnMethods {
 			view.firstRevealMade = true;
 		}
 		
-		// if in postfix mode
-		if (view.computeMode == 2) {
-			// if stack is empty add new number as 0
-			if (view.stack.size() == 0){
-				view.stack.add("0");
-			// else if the last added item is number (might be gramatically incorrect)
-			} else if (view.Calc.isDigitPlus(view.stack[view.stack.size()-1].substring(0,1))) {
-				view.stack[view.stack.size()-1] += "0";
-			// otherwise simply add 0, it start a new number edit
-			} else {
-				view.stack.add("0");
-			}
+
+		// if stack is empty add new number as `digit`
+		if (view.stack.size() == 0){
+			view.stack.add(digit);
+		// else if the last added item is number (might be gramatically incorrect)
+		} else if (view.Calc.isDigitPlus(view.stack[view.stack.size()-1].substring(0,1))) {
+			view.stack[view.stack.size()-1] += digit;
+		// otherwise simply add 0, it start a new number edit
+		} else {
+			view.stack.add(digit);
 		}
-		// if in prefix mode
-		if (view.computeMode == 1) {
-			// if stack is empty do nothing because no expression starts with number
-			if (view.stack.size() == 0){
-			
-			// else if the last added item is number (might be gramatically incorrect)
-			} else if (view.Calc.isDigitPlus(view.stack[view.stack.size()-1].substring(0,1))) {
-				view.stack[view.stack.size()-1] += "0";
-			// otherwise simply add 0, it start a new number edit
-			} else {
-				view.stack.add("0");
-			}
-		}
-		// if in infix mode
-		if (view.computeMode == 0) {
-			// if stack is empty add new number as 0
-			if (view.stack.size() == 0){
-				view.stack.add("0");
-			// else if the last added item is number (might be gramatically incorrect)
-			} else if (view.Calc.isDigitPlus(view.stack[view.stack.size()-1].substring(0,1))) {
-				view.stack[view.stack.size()-1] += "0";
-			// otherwise simply add 0, it start a new number edit
-			} else {
-				view.stack.add("0");
-			}
-		}
+		
     	// update view
 		Ui.requestUpdate();
 		return true;	

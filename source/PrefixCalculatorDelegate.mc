@@ -32,7 +32,10 @@ class PrefixCalculatorDelegate extends Ui.BehaviorDelegate {
 
 	// Called when select/start button is pressed.
 	function onSelect() {
-		return OnMethods.OnSelect(view, self);
+	    if (self.view.computeMode == 3 and self.view.stack.size() == self.view.restRpnStackLength) {
+    	} else {
+			return OnMethods.OnSelect(view, "0", self);
+		}
 	}
 
 
@@ -44,13 +47,19 @@ class PrefixCalculatorDelegate extends Ui.BehaviorDelegate {
 
  	// Called when up button is pressed.
     function onNextPage() {
-    	return OnMethods.RotateDigit(view, self, -1);
+        if (self.view.computeMode == 3 and self.view.stack.size() == self.view.restRpnStackLength) {
+    	} else {
+    		return OnMethods.RotateDigit(view, self, -1);
+    	}
     }
 
 
  	// Called when down button is pressed.
     function onPreviousPage() {
-    	OnMethods.RotateDigit(view, self, 1);
+    	if (self.view.computeMode == 3 and self.view.stack.size() == self.view.restRpnStackLength) {
+    	} else {
+    		OnMethods.RotateDigit(view, self, 1);
+    	}
     }    
     
 }

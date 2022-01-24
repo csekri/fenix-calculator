@@ -1,0 +1,13 @@
+<menu id="DigitMenu">
+	<menu-item id="d0">@Strings.s0</menu-item>
+	<menu-item id="d1">@Strings.s1</menu-item>
+	<menu-item id="d2">@Strings.s2</menu-item>
+	<menu-item id="d3">@Strings.s3</menu-item>
+	<menu-item id="d4">@Strings.s4</menu-item>
+	<menu-item id="d5">@Strings.s5</menu-item>
+	<menu-item id="d6">@Strings.s6</menu-item>
+	<menu-item id="d7">@Strings.s7</menu-item>
+	<menu-item id="d8">@Strings.s8</menu-item>
+	<menu-item id="d9">@Strings.s9</menu-item>
+	<menu-item id="ddot">@Strings.sdot</menu-item>
+</menu>

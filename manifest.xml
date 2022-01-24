@@ -3,6 +3,7 @@
         <iq:products>
             <iq:product id="approachs60"/>
             <iq:product id="approachs62"/>
+            <iq:product id="d2air"/>
             <iq:product id="d2bravo"/>
             <iq:product id="d2bravo_titanium"/>
             <iq:product id="d2charlie"/>
@@ -10,6 +11,7 @@
             <iq:product id="d2deltapx"/>
             <iq:product id="d2deltas"/>
             <iq:product id="descentmk1"/>
+            <iq:product id="descentmk2"/>
             <iq:product id="descentmk2s"/>
             <iq:product id="edge1030"/>
             <iq:product id="edge1030bontrager"/>
@@ -21,6 +23,8 @@
             <iq:product id="edge_1000"/>
             <iq:product id="edge_520"/>
             <iq:product id="edgeexplore"/>
+            <iq:product id="enduro"/>
+            <iq:product id="epix2"/>
             <iq:product id="fenix3"/>
             <iq:product id="fenix3_hr"/>
             <iq:product id="fenix5"/>
@@ -34,6 +38,9 @@
             <iq:product id="fenix6s"/>
             <iq:product id="fenix6spro"/>
             <iq:product id="fenix6xpro"/>
+            <iq:product id="fenix7"/>
+            <iq:product id="fenix7s"/>
+            <iq:product id="fenix7x"/>
             <iq:product id="fenixchronos"/>
             <iq:product id="fr230"/>
             <iq:product id="fr235"/>
@@ -65,6 +72,7 @@
             <iq:product id="rino7xx"/>
             <iq:product id="venu"/>
             <iq:product id="venu2"/>
+            <iq:product id="venu2plus"/>
             <iq:product id="venu2s"/>
             <iq:product id="venud"/>
             <iq:product id="venusq"/>

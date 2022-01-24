@@ -21,33 +21,26 @@ class OpsMenuDelegate extends Ui.MenuInputDelegate {
 		//1 END
 		
 		//2 BEGIN: if enter is selected in postfix mode with non-empty stack
-		if (item == :enter and view.computeMode == 2) {
-				view.stack.add("0");
-		}
-		//2 END
-		//3 BEGIN: if enter is selected in prefix mode with non-empty stack
-		if (item == :enter and view.computeMode == 1) {
-			if (view.stack.size() > 0){
+		if (item == :enter) {
+			if (self.view.computeMode == 3 and self.view.stack.size() == 5) {
+			} else {
 				view.stack.add("0");
 			}
 		}
 		//3 END
 		if (item == :clear) {
 			view.isInputFull = false;
-			if (view.computeMode == 1) {
-				view.stack = [];			
-			} else if (view.computeMode == 2) {
-				view.stack = ["0"];
+			if (self.view.computeMode == 3) {
+		    	self.view.restRpnStackLength = -1;
 			}
-		} else if (item == :delete) {
+			view.stack = [];
+		} else if (item == :delete and view.stack.size() > 0) {
 			view.isInputFull = false;
-			if (view.stack.size() > 0) {
-				if (view.computeMode == 2 and view.stack.size() == 1) {
-					view.stack = ["0"];
-				} else {
-					view.stack = view.stack.slice(null, view.stack.size()-1);
-				}
+			if (self.view.computeMode == 3) {
+		    	self.view.restRpnStackLength = -1;
 			}
+			
+			view.stack = view.stack.slice(null, view.stack.size()-1);
 		} else if (item == :add) {
 			view.stack.add("+");
 		} else if (item == :subtract) {
@@ -63,9 +56,6 @@ class OpsMenuDelegate extends Ui.MenuInputDelegate {
 		} else if (item == :power) {
 			view.stack.add("^");
 		} else if (item == :e) {
-			if (view.stack.size() > 0 and view.Calc.isDigitPlus(view.stack[view.stack.size()-1])) {
-				view.stack = view.stack.slice(null, view.stack.size()-1);
-			}
 			view.stack.add("e");
 			Ui.popView(Ui.SLIDE_IMMEDIATE);
 		} else if (item == :logarithm) {
@@ -82,9 +72,6 @@ class OpsMenuDelegate extends Ui.MenuInputDelegate {
 		} else if (item == :trigonometry) {
 			Ui.pushView(new Rez.Menus.TrigonometryMenu(), self, Ui.SLIDE_IMMEDIATE);
 		} else if (item == :pi) {
-			if (view.stack.size() > 0 and view.Calc.isDigitPlus(view.stack[view.stack.size()-1])) {
-				view.stack = view.stack.slice(null, view.stack.size()-1);
-			}
 			view.stack.add("pi");
 			Ui.popView(Ui.SLIDE_IMMEDIATE);
 		} else if (item == :sin) {

@@ -3,4 +3,5 @@
 	<menu-item id="inf">@Strings.MenuInfix</menu-item>
 	<menu-item id="pre">@Strings.MenuPre</menu-item>
 	<menu-item id="post">@Strings.MenuPost</menu-item>
+	<menu-item id="poststack">@Strings.MenuPostStack</menu-item>
 </menu>

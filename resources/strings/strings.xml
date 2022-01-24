@@ -9,8 +9,8 @@
     <string id="MenuSubtract">-</string>
     <string id="MenuMultiply">×</string>
     <string id="MenuDivide">÷</string>
-    <string id="MenuSqrt">Square root</string>
-    <string id="MenuPower">Power</string>
+    <string id="MenuSqrt">Sqrt</string>
+    <string id="MenuPower">^</string>
     <string id="MenuE">e</string>
     <string id="MenuLogarithm">Logarithms</string>
     <string id="MenuLog10">Base 10 Log</string>
@@ -19,6 +19,7 @@
     <string id="MenuExit">Exit</string>
     <string id="MenuPre">Prefix</string>
     <string id="MenuPost">Postfix</string>
+    <string id="MenuPostStack">RPN Stack</string>
     <string id="MenuTrigonometry">Trigonometry</string>
     <string id="MenuPi">Pi</string>
     <string id="MenuSin">Sin</string>
@@ -32,4 +33,16 @@
 	<string id="MenuBrLeft">(</string>
 	<string id="MenuBrRight">)</string>
 	<string id="MenuInfix">Traditional</string>
+	<string id="s0">0</string>
+	<string id="s1">1</string>
+	<string id="s2">2</string>
+	<string id="s3">3</string>
+	<string id="s4">4</string>
+	<string id="s5">5</string>
+	<string id="s6">6</string>
+	<string id="s7">7</string>
+	<string id="s8">8</string>
+	<string id="s9">9</string>
+	<string id="sdot">.</string>
+	
 </strings>
