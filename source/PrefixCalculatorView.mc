@@ -167,7 +167,7 @@ class PrefixCalculatorView extends Ui.View {
 	        	}
 		        dc.drawText(right, top + row * numberHeight, Gfx.FONT_TINY, cumstring.substring(0, rowCharacterCount), Gfx.TEXT_JUSTIFY_LEFT); // a row from the input
 		        if (rowCharacterCount == cumstring.length()) {
-		        	if (Calc.isDigitPlus(cumstringLastChar)) {
+		        	if (Calc.isDigit(cumstringLastChar)) {
 			        	dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_WHITE);
 			        	dc.drawText(right + dc.getTextWidthInPixels(cumstring.substring(0, cumstring.length()-1), Gfx.FONT_TINY), top+row * numberHeight, Gfx.FONT_TINY, cumstringLastChar, Gfx.TEXT_JUSTIFY_LEFT);
 			        	dc.setColor(Gfx.COLOR_WHITE, Gfx.COLOR_BLACK);

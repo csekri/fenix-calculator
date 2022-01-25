@@ -7,16 +7,24 @@ using Toybox.Math;
 
 class Calc {
 	// returns if character is a digit
-	function isDigit(token) {
-		return token.equals("0") or token.equals("1") or token.equals("2") or
-		       token.equals("3") or token.equals("4") or token.equals("5") or
-		       token.equals("6") or token.equals("7") or token.equals("8") or token.equals("9");
+	function isDigit(digit) {
+		return digit.equals("0") or digit.equals("1") or digit.equals("2") or
+		       digit.equals("3") or digit.equals("4") or digit.equals("5") or
+		       digit.equals("6") or digit.equals("7") or digit.equals("8") or digit.equals("9") or digit.equals(".");
 	}
 	
 	
 	// same as isDigit but includes "." too
-	function isDigitPlus(token) {
-		return Calc.isDigit(token) or token.equals(".") or token.equals("-");
+	function isDigitPlus(digit) {
+		return Calc.isDigit(digit) or digit.equals("-");
+	}
+	// same as isDigit but includes "." too
+	function isNumber(token) {
+		if (token.equals("-")) {
+			return false;
+		}
+		var firstCharacter = token.substring(0,1);
+		return Calc.isDigitPlus(firstCharacter) or firstCharacter.equals(".") or firstCharacter.equals("-");
 	}
 	function formatNumber(str) {
 		if (str.equals(".")) { return "0.0"; }
@@ -123,7 +131,7 @@ class Calc {
 					pureInteger = false;
 				}
 			}
-			if (Calc.isDigitPlus(token.substring(0,1))) {
+			if (Calc.isNumber(token)) {
 				if (pureInteger) {
 			    	var apiVersion = System.getDeviceSettings().monkeyVersion;
 			    	// from API level 3.1.0 is the toLong supported
@@ -243,7 +251,7 @@ class Calc {
 					pureInteger = false;
 				}
 			}
-			if (Calc.isDigitPlus(token.substring(0,1))) {
+			if (Calc.isNumber(token)) {
 				if (pureInteger) {
 			    	var apiVersion = System.getDeviceSettings().monkeyVersion;
 			    	// from API level 3.1.0 is the toLong supported
@@ -303,16 +311,7 @@ class Calc {
 			}
 		}
 	}
-	
-//	function bracketPairCriterium(tokens) {
-//		leftBr = 0;
-//		rightBr = 0;
-//		for (var i=0; i<tokens.size(); i += 1) {
-//			if tokens.equals(")") {
-//				add
-//			}
-//		}
-//	}
+
 	
 	function evalInfix(tokens) {
 		if (tokens.size() == 0) {
@@ -344,12 +343,12 @@ class Calc {
 	    		if (op_stack.size() == 0) {
 	    			return "-";
 	    		}
-		    	while (!op_stack[op_stack.size()-1].equals("(")) {
+		    	while (op_stack.size() > 0 and !op_stack[op_stack.size()-1].equals("(")) {
 		    		pop = op_stack[op_stack.size()-1];
 		    		op_stack = op_stack.slice(0, op_stack.size()-1);
 		    		out_queue.add(pop);
 		    		if (op_stack.size() == 0) {
-		    			break;
+		    			return "-";
 		    		}
 		    	}
 	    		op_stack = op_stack.slice(0, op_stack.size()-1); // pop left parenthesis
@@ -359,7 +358,7 @@ class Calc {
 		    		out_queue.add(pop);
 		    	}
 		    }
-		    else if (Calc.isDigitPlus(token.substring(0,1)) or token.equals("e") or token.equals("pi")) {
+		    else if (Calc.isNumber(token) or token.equals("e") or token.equals("pi")) {
 					out_queue.add(token);
 		    }
 		}

@@ -96,7 +96,7 @@ class InputDelegate extends Ui.InputDelegate {
 			if (view.stack.size() > 1 and view.stack[view.stack.size()-1].equals("(") and Calc.isUnaryOPExceptMinus(view.stack[view.stack.size()-2])) {
 				view.stack = view.stack.slice(null, view.stack.size()-2);
 			} else {
-				if (Calc.isDigitPlus(view.stack[view.stack.size()-1].substring(0, 1))){
+				if (Calc.isNumber(view.stack[view.stack.size()-1])){
 					if (view.stack[view.stack.size()-1].length() > 1) {
 						view.stack[view.stack.size()-1] = view.stack[view.stack.size()-1].substring(0, view.stack[view.stack.size()-1].length()-1);
 					} else {

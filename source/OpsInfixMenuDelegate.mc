@@ -50,7 +50,7 @@ class OpsInfixMenuDelegate extends Ui.MenuInputDelegate {
 		} else if (item == :power) {
 			view.stack.add("^");
 		} else if (item == :e) {
-			if (view.stack.size() > 0 and view.Calc.isDigitPlus(view.stack[view.stack.size()-1])) {
+			if (view.stack.size() > 0 and view.Calc.isNumber(view.stack[view.stack.size()-1])) {
 				view.stack = view.stack.slice(null, view.stack.size()-1);
 			}
 			view.stack.add("e");
@@ -71,7 +71,7 @@ class OpsInfixMenuDelegate extends Ui.MenuInputDelegate {
 		} else if (item == :trigonometry) {
 			Ui.pushView(new Rez.Menus.TrigonometryMenu(), self, Ui.SLIDE_IMMEDIATE);
 		} else if (item == :pi) {
-			if (view.stack.size() > 0 and view.Calc.isDigitPlus(view.stack[view.stack.size()-1])) {
+			if (view.stack.size() > 0 and view.Calc.isNumber(view.stack[view.stack.size()-1])) {
 				view.stack = view.stack.slice(null, view.stack.size()-1);
 			}
 			view.stack.add("pi");

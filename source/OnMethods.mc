@@ -35,7 +35,7 @@ class OnMethods {
 		if (view.stack.size() == 0){
 			view.stack.add(digit);
 		// else if the last added item is number (might be gramatically incorrect)
-		} else if (view.Calc.isDigitPlus(view.stack[view.stack.size()-1].substring(0,1))) {
+		} else if (view.Calc.isNumber(view.stack[view.stack.size()-1])) {
 			view.stack[view.stack.size()-1] += digit;
 		// otherwise simply add 0, it start a new number edit
 		} else {
@@ -82,7 +82,7 @@ class OnMethods {
     	var lastItem = view.stack[view.stack.size()-1];
     	var lastItemLastDigit = lastItem.substring(lastItem.length()-1, lastItem.length());
     	
-    	if (view.Calc.isDigitPlus(lastItemLastDigit)) {
+    	if (view.Calc.isNumber(lastItem)) {
 	    	var digitAsNumber;
 	    	var newDigit;
 	    	if (lastItemLastDigit.equals(".")) {
