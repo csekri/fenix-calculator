@@ -39,7 +39,6 @@ class PrefixCalculatorView extends Ui.View {
 	
 	
 	function rpnStackView(view, dc, screenWidth, screenHeight, numberHeight) {
-		System.println(view.stack);
 		var lengthBefore = view.stack.size();
 		view.stack = Calc.evalRpnStack(view.stack);
 		var lengthAfter = view.stack.size();
@@ -60,7 +59,18 @@ class PrefixCalculatorView extends Ui.View {
 	    	} else {
 	    		text = textPrefix + view.stack[view.stack.size()-1-i];
 	    	}
-	    		dc.drawText(screenWidth * 0.13, screenHeight * 0.70 - i*numberHeight, Gfx.FONT_TINY, text, Gfx.TEXT_JUSTIFY_LEFT); // result text	    	
+	    	dc.drawText(screenWidth * 0.13, screenHeight * 0.70 - i*numberHeight, Gfx.FONT_TINY, text, Gfx.TEXT_JUSTIFY_LEFT); // result text
+	    	if (i == 0 and Calc.isNumber(view.stack[view.stack.size() - 1]) and view.restRpnStackLength != view.stack.size()) {
+				dc.setColor(Gfx.COLOR_BLACK, Gfx.COLOR_WHITE);
+	        	dc.drawText(
+	        		screenWidth*0.13 + dc.getTextWidthInPixels(text.substring(0, text.length()-1), Gfx.FONT_TINY),
+	        		screenHeight * 0.70,
+	        		Gfx.FONT_TINY,
+	        		text.substring(text.length()-1, text.length()),
+	        		Gfx.TEXT_JUSTIFY_LEFT);
+	        	dc.setColor(Gfx.COLOR_WHITE, Gfx.COLOR_BLACK);
+	    		
+	    	}
 		}
 		if (view.stack.size() == 0) {
 	    	dc.drawText(screenWidth * 0.13, screenHeight * 0.70, Gfx.FONT_TINY, ">", Gfx.TEXT_JUSTIFY_LEFT); // draw ">" when the stack is empty		
@@ -117,7 +127,6 @@ class PrefixCalculatorView extends Ui.View {
 	        } else if (self.computeMode == 2) { // postfix mode
 	        	expr = Calc.evalPost(stack);        
 	        } else if (self.computeMode == 0) { // infix mode
-//	        	System.println(stack);
 	        	expr = Calc.evalInfix(stack);
 	        }
 	        expr = "= " + expr;

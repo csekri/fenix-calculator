@@ -56,11 +56,16 @@ class OnMethods {
 			view.firstRevealMade = true;
 		}
 		// opens operations view
-		if (view.computeMode == 0) {
-			Ui.pushView(new Rez.Menus.OpsInfixMenu(), new OpsInfixMenuDelegate(view), Ui.SLIDE_IMMEDIATE);
-			
-		} else {
-			Ui.pushView(new Rez.Menus.OpsMenu(), new OpsMenuDelegate(view), Ui.SLIDE_IMMEDIATE);		
+		switch (view.computeMode) {
+			case 0:
+				Ui.pushView(new Rez.Menus.OpsInfixMenu(), new OpsInfixMenuDelegate(view), Ui.SLIDE_IMMEDIATE);
+				break;
+			case 3:
+				Ui.pushView(new Rez.Menus.OpsMenuStack(), new OpsMenuDelegate(view), Ui.SLIDE_IMMEDIATE);
+				break;
+			default:
+				Ui.pushView(new Rez.Menus.OpsMenu(), new OpsMenuDelegate(view), Ui.SLIDE_IMMEDIATE);
+				
 		}
 		return true;
 	}

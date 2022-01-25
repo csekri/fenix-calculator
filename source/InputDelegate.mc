@@ -36,6 +36,9 @@ class InputDelegate extends Ui.InputDelegate {
 	    		case Ui.SWIPE_LEFT:
 	    			OnMethods.OnSelect(view, "0", self);
 	    			break;
+	    		case Ui.SWIPE_RIGHT:
+	    			Ui.popView(Ui.SLIDE_IMMEDIATE);
+	    			break;
 			}
 		}
     }
@@ -90,6 +93,26 @@ class InputDelegate extends Ui.InputDelegate {
     }
     
     function onKeyPressed(keyEvent) {
+    	switch (keyEvent.getKey()) {
+    		case Ui.KEY_ESC:
+    			Ui.popView(Ui.SLIDE_IMMEDIATE);
+    			return true;
+    		break;
+    		case Ui.KEY_UP:
+	    		if (self.view.computeMode == 3 and self.view.stack.size() == self.view.restRpnStackLength) {
+		    	} else {
+		    		OnMethods.RotateDigit(view, self, 1);
+		    	}
+		    	return true;
+    		break;
+    		case Ui.KEY_DOWN:
+	    		if (self.view.computeMode == 3 and self.view.stack.size() == self.view.restRpnStackLength) {
+		    	} else {
+		    		OnMethods.RotateDigit(view, self, -1);
+		    	}
+		    	return true;
+    		break;
+    	}
     	view.isInputFull = false;
     	var lengthBefore = view.stack.size();
 		if (view.stack.size() > 0) {

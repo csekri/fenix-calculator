@@ -393,7 +393,6 @@ class Calc {
 			if (!evalEnd.equals("-")) {
 				returnList = tokens.slice(0, tokens.size()-i+1);
 				returnList[returnList.size()-1] = evalEnd;
-				System.println(returnList);
 				return returnList;
 			}
 		}

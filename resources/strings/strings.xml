@@ -1,9 +1,10 @@
 <strings>
     <string id="AppName">Math Calculator</string>
-    <string id="StartPrompt">Prefix Calculator\nPress START</string>
+    <string id="StartPrompt">Math Calculator\nPress START</string>
     <string id="MenuEnter">New Number</string>
     <string id="MenuClear">Clear</string>
     <string id="MenuDelete">&#60;- Delete</string>
+    <string id="MenuSwap">x&#60;>y</string>
     <string id="MenuInvert">±</string>
     <string id="MenuAdd">+</string>
     <string id="MenuSubtract">-</string>
