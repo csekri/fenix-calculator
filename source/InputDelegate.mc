@@ -36,11 +36,13 @@ class InputDelegate extends Ui.InputDelegate {
 	    		case Ui.SWIPE_LEFT:
 	    			OnMethods.OnSelect(view, "0", self);
 	    			break;
-	    		case Ui.SWIPE_RIGHT:
-	    			Ui.popView(Ui.SLIDE_IMMEDIATE);
-	    			break;
 			}
 		}
+		if (direction == Ui.SWIPE_RIGHT) {
+			Ui.popView(Ui.SLIDE_IMMEDIATE);
+			Ui.popView(Ui.SLIDE_IMMEDIATE);
+		}
+		return true;
     }
 
 
@@ -95,6 +97,7 @@ class InputDelegate extends Ui.InputDelegate {
     function onKeyPressed(keyEvent) {
     	switch (keyEvent.getKey()) {
     		case Ui.KEY_ESC:
+    			Ui.popView(Ui.SLIDE_IMMEDIATE);
     			Ui.popView(Ui.SLIDE_IMMEDIATE);
     			return true;
     		break;
