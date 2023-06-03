@@ -105,9 +105,9 @@ class Calc {
 			    if (token.equals("lg")) {
 			        stack[stack.size()-1] = Math.log(stack[stack.size()-1], 10);}
 			    if (token.equals("raddeg")) {
-			        stack[stack.size()-1] = stack[stack.size()-1] / (2 * 3.141565) * 360;}
+			        stack[stack.size()-1] = stack[stack.size()-1] / (2 * 3.141592) * 360;}
 			    if (token.equals("degrad")) {
-			        stack[stack.size()-1] = stack[stack.size()-1] * (2 * 3.141565) / 360;}
+			        stack[stack.size()-1] = stack[stack.size()-1] * (2 * 3.141592) / 360;}
 			    continue;
 			}
 		
@@ -117,7 +117,7 @@ class Calc {
 		        continue;
 		    }
 		    if (token.equals("pi")) {
-		    	var pi = 3.141565;
+		    	var pi = 3.141592;
 		        stack.add(pi);
 		        continue;
 		    }
@@ -226,9 +226,9 @@ class Calc {
 			    if (token.equals("lg")) {
 			        stack[stack.size()-1] = Math.log(stack[stack.size()-1], 10);}
 			    if (token.equals("raddeg")) {
-			        stack[stack.size()-1] = stack[stack.size()-1] / (2 * 3.141565) * 360;}
+			        stack[stack.size()-1] = stack[stack.size()-1] / (2 * 3.141592) * 360;}
 			    if (token.equals("degrad")) {
-			        stack[stack.size()-1] = stack[stack.size()-1] * (2 * 3.141565) / 360;}
+			        stack[stack.size()-1] = stack[stack.size()-1] * (2 * 3.141592) / 360;}
 			    continue;
 			}
 		
@@ -238,7 +238,7 @@ class Calc {
 		        continue;
 		    }
 		    if (token.equals("pi")) {
-		    	var pi = 3.141565;
+		    	var pi = 3.141592;
 		        stack.add(pi);
 		        continue;
 		    }
@@ -246,6 +246,7 @@ class Calc {
 		    var integer = null;
 		    var real = null;
 		    var pureInteger = true;
+		    
 			for (var j = 0; j < token.length(); j += 1) {
 				if (token.substring(j, j+1).equals(".")) {
 					pureInteger = false;
@@ -310,6 +311,7 @@ class Calc {
 				return result;
 			}
 		}
+		return 0;
 	}
 
 	

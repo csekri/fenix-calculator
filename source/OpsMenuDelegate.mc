@@ -16,7 +16,7 @@ class OpsMenuDelegate extends Ui.MenuInputDelegate {
 	function onMenuItem(item) {
 		//1 BEGIN: if the 4 rows are full, this disables any selection other than clear and delete with early exit
 		if ((item != :clear and item != :delete) and view.isInputFull) {
-			return true;
+			return;
 		}
 		//1 END
 		
@@ -131,6 +131,6 @@ class OpsMenuDelegate extends Ui.MenuInputDelegate {
 				Ui.popView(Ui.SLIDE_IMMEDIATE);
 			break;
 		}
-		return true;
+		//return true;
 	}
 }

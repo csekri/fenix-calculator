@@ -53,6 +53,6 @@ class DigitMenuDelegate extends Ui.MenuInputDelegate {
 			    break;
 		}
 		OnMethods.OnSelect(view, digit, delegate);
-		return true;
-}
+		//return true;
+	}
 }

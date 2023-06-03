@@ -99,21 +99,21 @@ class InputDelegate extends Ui.InputDelegate {
     		case Ui.KEY_ESC:
     			Ui.popView(Ui.SLIDE_IMMEDIATE);
     			Ui.popView(Ui.SLIDE_IMMEDIATE);
-    			return true;
+    			//return true;
     		break;
     		case Ui.KEY_UP:
 	    		if (self.view.computeMode == 3 and self.view.stack.size() == self.view.restRpnStackLength) {
 		    	} else {
 		    		OnMethods.RotateDigit(view, self, 1);
 		    	}
-		    	return true;
+		    	//return true;
     		break;
     		case Ui.KEY_DOWN:
 	    		if (self.view.computeMode == 3 and self.view.stack.size() == self.view.restRpnStackLength) {
 		    	} else {
 		    		OnMethods.RotateDigit(view, self, -1);
 		    	}
-		    	return true;
+		    	//return true;
     		break;
     	}
     	view.isInputFull = false;
